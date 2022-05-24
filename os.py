@@ -1,12 +1,12 @@
 from scheduler import Scheduler
 
 def foo():
-    while True:
+    for i in range(10):
         print("I'm foo")
         yield
 
 def bar():
-    while True:
+    for i in range(5):
         print("I'm bar")
         yield
 
