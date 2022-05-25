@@ -1,6 +1,5 @@
 from scheduler import Scheduler
 from syscall_get_tid import GetTid
-from syscall_kill_task import KillTask
 from syscall_new_task import NewTask
 from syscall_wait_task import WaitTask
 
