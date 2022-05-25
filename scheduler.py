@@ -8,6 +8,7 @@ class Scheduler:
     def __init__(self):
         self.ready = Queue()
         self.taskmap = {}
+        self.exit_waiting = {}
 
     def new(self, target):
         newtask = Task(target)
@@ -18,6 +19,16 @@ class Scheduler:
     def exit(self,task):
         print(f"Task {task.tid} terminated")
         del self.taskmap[task.tid]
+        # Get tasks waiting for this to exit back to life
+        for task in self.exit_waiting.pop(task.tid,[]):
+            self.schedule(task)
+
+    def waitforexit(self,task,waittid):
+        if waittid in self.taskmap:
+            self.exit_waiting.setdefault(waittid,[]).append(task)
+            return True
+        else:
+            return False        
 
     def schedule(self, task):
         self.ready.put(task)
