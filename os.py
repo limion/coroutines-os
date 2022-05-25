@@ -1,5 +1,6 @@
 from scheduler import Scheduler
 from syscall_get_tid import GetTid
+from syscall_kill_task import KillTask
 from syscall_new_task import NewTask
 
 def foo():
@@ -19,8 +20,10 @@ def bar():
 
 def newfoo():
     mytid = yield GetTid()
-    print("I'm gonna create a new task foo and exit", mytid)
+    print("I'm gonna create a new task foo, kill it and exit", mytid)
     newtid = yield NewTask(foo())
+    print(f"Done {newtid}, now let's kill it", mytid)
+    yield KillTask(newtid)
     print(f"Done {newtid}, exit", mytid)
 
 
