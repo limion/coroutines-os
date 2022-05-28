@@ -8,4 +8,7 @@ class Queue:
         return self.queue.append(element)
 
     def get(self):
-        return self.queue.popleft() 
+        return self.queue.popleft()
+
+    def empty(self):
+        return len(self.queue) == 0
